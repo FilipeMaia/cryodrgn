@@ -1365,12 +1365,12 @@ Decoder Network:
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">train_vae</span></code> on the full particle stack of D=128 particles (1 GPU; 64GB memory requirement)</p>
 <p>Example command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cryodrgn train_vae data/128/particles.128.mrcs <span class="se">\</span>
-										--ctf data/ctf.pkl <span class="se">\</span>
-										--poses data/poses.pkl <span class="se">\</span>
-										--zdim <span class="m">8</span> <span class="se">\</span>
-										-n <span class="m">50</span> <span class="se">\</span>
-										--uninvert-data <span class="se">\ </span><span class="c1"># NOTE: Use this flag only if particles are dark-on-light (negative stain format)</span>
-										-o tutorial/00_vae128 &gt; tutorial_00.log
+    --ctf data/ctf.pkl <span class="se">\</span>
+	--poses data/poses.pkl <span class="se">\</span>
+	--zdim <span class="m">8</span> <span class="se">\</span>
+	-n <span class="m">50</span> <span class="se">\</span>
+	--uninvert-data <span class="se">\ </span><span class="c1"># NOTE: Use this flag only if particles are dark-on-light (negative stain format)</span>
+	-o tutorial/00_vae128 &gt; tutorial_00.log
 </pre></div>
 </div>
 <p>Inputs:</p>
@@ -1530,6 +1530,8 @@ Extra arguments for volume generation:
   --pc PC               Number of principal component traversals to generate
                         (default: 2)
   --ksample KSAMPLE     Number of kmeans samples to generate (default: 20)
+  --vol-start-index VOL_START_INDEX
+                        Default value of start index for volume generation (default: 0)
 </pre></div>
 </div>
 </li>
@@ -1993,7 +1995,7 @@ plt.ylabel<span class="o">(</span><span class="s1">&#39;UMAP2&#39;</span><span c
 <section id="additional-functionality-writing-a-new-star-file">
 <h4>(Additional Functionality) Writing a new .star file<a class="headerlink" href="#additional-functionality-writing-a-new-star-file" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
-<li><p>The selected particles can be converted to a .star file using <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">write_starfile</span></code>. See Section 8.3 for more details on this script.</p></li>
+<li><p>The selected particles can be converted to a .star file using <code class="docutils literal notranslate"><span class="pre">cryodrgn_utils</span> <span class="pre">write_star</span></code>. See Section 8.3 for more details on this script.</p></li>
 </ul>
 </section>
 <section id="additional-functionality-extracting-a-new-particle-stack">
@@ -2076,6 +2078,8 @@ Extra arguments for volume generation:
   --pc PC               Number of principal component traversals to generate
                         (default: 2)
   --ksample KSAMPLE     Number of kmeans samples to generate (default: 20)
+  --vol-start-index VOL_START_INDEX
+                        Default value of start index for volume generation (default: 0)  
 </pre></div>
 </div>
 </li>
@@ -2287,6 +2291,7 @@ cryodrgn eval_vol /nobackup/users/zhonge/cryodrgn/11_l17_ribo/04_vae256_gpu/3_gp
 <li><p>More volumes can be generated with <code class="docutils literal notranslate"><span class="pre">--ksample</span> <span class="pre">N</span></code></p></li>
 <li><p>More PCs (up to the dimension of the latent variable) can be generated with <code class="docutils literal notranslate"><span class="pre">--pc</span> <span class="pre">N</span></code></p></li>
 <li><p>The pixel size and handedness of a <code class="docutils literal notranslate"><span class="pre">.mrc</span></code> file can also be modified later with the scripts <code class="docutils literal notranslate"><span class="pre">add_psize.py</span></code> and <code class="docutils literal notranslate"><span class="pre">flip_hand.py</span></code> in the <code class="docutils literal notranslate"><span class="pre">utils</span></code> subdirectory of the cryodrgn repository.</p></li>
+<li><p>The argument <code class="docutils literal notranslate"><span class="pre">--vol-start-index</span></code> (default <code class="docutils literal notranslate"><span class="pre">0</span></code>) dictates the starting index of <code class="docutils literal notranslate"><span class="pre">.mrc</span></code> filenames for generated volumes (<code class="docutils literal notranslate"><span class="pre">vol_nnn.mrc</span></code>). You may want to set this to <code class="docutils literal notranslate"><span class="pre">1</span></code> if, for example you are using <code class="docutils literal notranslate"><span class="pre">ChimeraX</span></code> to visualize these maps, which by convention numbers all maps that it opens from <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p></li>
 </ul>
 <section id="id1">
 <h4>Visualization of the latent space<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h4>
@@ -2475,11 +2480,11 @@ analysis.plot_by_cluster<span class="o">(</span>umap<span class="o">[</span>:,0<
 </section>
 <section id="converting-to-a-star-file">
 <h3>Converting to a .star file<a class="headerlink" href="#converting-to-a-star-file" title="Permalink to this headline">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">write_starfile</span></code> tool can be used to convert the index <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> of selected particles (and the input particles <code class="docutils literal notranslate"><span class="pre">.mrcs</span></code>, CTF <code class="docutils literal notranslate"><span class="pre">.pkl</span></code>, and optionally the pose <code class="docutils literal notranslate"><span class="pre">.pkl</span></code>) to <code class="docutils literal notranslate"><span class="pre">.star</span></code> file format:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">cryodrgn_utils</span> <span class="pre">write_star</span></code> tool can be used to convert the index <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> of selected particles (and the input particles <code class="docutils literal notranslate"><span class="pre">.mrcs</span></code>, CTF <code class="docutils literal notranslate"><span class="pre">.pkl</span></code>, and optionally the pose <code class="docutils literal notranslate"><span class="pre">.pkl</span></code>) to <code class="docutils literal notranslate"><span class="pre">.star</span></code> file format:</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">cryodrgn</span> <span class="pre">write_starfile</span> <span class="pre">-h</span></code></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>cryodrgn<span class="o">)</span> $ cryodrgn write_starfile -h
-usage: cryodrgn write_starfile <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--poses POSES<span class="o">]</span> <span class="o">[</span>--ind IND<span class="o">]</span> <span class="o">[</span>--full-path<span class="o">]</span> -o O <span class="o">[</span>--ref-star REF_STAR<span class="o">]</span> <span class="o">[</span>--keep-micrograph<span class="o">]</span> particles ctf
+<li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">cryodrgn_utils</span> <span class="pre">write_star</span> <span class="pre">-h</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>cryodrgn<span class="o">)</span> $ cryodrgn_utils write_star -h
+usage: cryodrgn_utils write_star <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--poses POSES<span class="o">]</span> <span class="o">[</span>--ind IND<span class="o">]</span> <span class="o">[</span>--full-path<span class="o">]</span> -o O <span class="o">[</span>--ref-star REF_STAR<span class="o">]</span> <span class="o">[</span>--keep-micrograph<span class="o">]</span> particles ctf
 
 Create a Relion <span class="m">3</span>.0 star file from a particle stack and ctf parameters
 
@@ -2503,7 +2508,7 @@ Optionally include additional star file columns:
 </ul>
 <p>Note: The output .star file will only contain CTF (and optionally pose information). Any additional fields in the input .cs/.star file will not be preserved — please file a github issue if this functionality is desired.</p>
 <p>Example command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cryodrgn write_starfile data/128/particles.128.mrcs data/ctf.pkl <span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cryodrgn_utils write_star data/128/particles.128.mrcs data/ctf.pkl <span class="se">\</span>
     --poses data/poses.pkl
     --ind tutorial/01_vae256/ind_selected_classC4.pkl	<span class="se">\	</span>
     --full-path <span class="se">\</span>
@@ -2514,7 +2519,7 @@ Optionally include additional star file columns:
 <section id="re-extracting-particles-from-the-micrograph">
 <h3>Re-extracting particles from the micrograph<a class="headerlink" href="#re-extracting-particles-from-the-micrograph" title="Permalink to this headline">#</a></h3>
 <p>To re-extract particles from the original micrograph (e.g. at full resolution)</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cryodrgn write_starfile data/128/particles.128.mrcs data/ctf.pkl <span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cryodrgn_utils write_star data/128/particles.128.mrcs data/ctf.pkl <span class="se">\</span>
     --poses data/poses.pkl
     --ind tutorial/01_vae256/ind_selected_classC4.pkl	<span class="se">\	</span>
     --full-path <span class="se">\</span>
