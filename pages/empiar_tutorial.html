@@ -2480,33 +2480,29 @@ analysis.plot_by_cluster<span class="o">(</span>umap<span class="o">[</span>:,0<
 </section>
 <section id="converting-to-a-star-file">
 <h3>Converting to a .star file<a class="headerlink" href="#converting-to-a-star-file" title="Permalink to this headline">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">cryodrgn_utils</span> <span class="pre">write_star</span></code> tool can be used to convert the index <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> of selected particles (and the input particles <code class="docutils literal notranslate"><span class="pre">.mrcs</span></code>, CTF <code class="docutils literal notranslate"><span class="pre">.pkl</span></code>, and optionally the pose <code class="docutils literal notranslate"><span class="pre">.pkl</span></code>) to <code class="docutils literal notranslate"><span class="pre">.star</span></code> file format:</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">cryodrgn_utils</span> <span class="pre">write_star</span></code> tool can be used to convert the index <code class="docutils literal notranslate"><span class="pre">.pkl</span></code> of selected particles (and the input particles <code class="docutils literal notranslate"><span class="pre">.mrcs</span></code>, and optionally the ctf and/or pose <code class="docutils literal notranslate"><span class="pre">.pkl</span></code>) to <code class="docutils literal notranslate"><span class="pre">.star</span></code> file format:</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">$</span> <span class="pre">cryodrgn_utils</span> <span class="pre">write_star</span> <span class="pre">-h</span></code></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>cryodrgn<span class="o">)</span> $ cryodrgn_utils write_star -h
-usage: cryodrgn_utils write_star <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--poses POSES<span class="o">]</span> <span class="o">[</span>--ind IND<span class="o">]</span> <span class="o">[</span>--full-path<span class="o">]</span> -o O <span class="o">[</span>--ref-star REF_STAR<span class="o">]</span> <span class="o">[</span>--keep-micrograph<span class="o">]</span> particles ctf
+usage: cryodrgn_utils write_star <span class="o">[</span>-h<span class="o">]</span> <span class="o">[</span>--ctf CTF<span class="o">]</span> <span class="o">[</span>--poses POSES<span class="o">]</span> <span class="o">[</span>--ind IND<span class="o">]</span> <span class="o">[</span>--full-path<span class="o">]</span> -o O particles
 
 Create a Relion <span class="m">3</span>.0 star file from a particle stack and ctf parameters
 
 positional arguments:
   particles            Input particles <span class="o">(</span>.mrcs, .txt<span class="o">)</span>
-  ctf                  Input ctf.pkl
 
 optional arguments:
   -h, --help           show this <span class="nb">help</span> message and <span class="nb">exit</span>
-  --poses POSES        Optionally include pose.pkl
+  --ctf CTF            Optionally include ctf information from a .pkl file
+  --poses POSES        Optionally include pose information from a .pkl file
   --ind IND            Optionally filter by selected index array <span class="o">(</span>.pkl<span class="o">)</span>
   --full-path          Write the full path to particles <span class="o">(</span>default: relative paths<span class="o">)</span>
   -o O                 Output .star file
-
-Optionally include additional star file columns:
-  --ref-star REF_STAR  Reference star file from original import
-  --keep-micrograph    Include micrograph coordinate headers
 </pre></div>
 </div>
 </li>
 </ul>
-<p>Note: The output .star file will only contain CTF (and optionally pose information). Any additional fields in the input .cs/.star file will not be preserved — please file a github issue if this functionality is desired.</p>
+<p>Note: This command will add ctf/pose information from the corresponding .pkl files, if provided. Any additional fields in the input .star file will be preserved as-is.</p>
 <p>Example command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cryodrgn_utils write_star data/128/particles.128.mrcs data/ctf.pkl <span class="se">\</span>
     --poses data/poses.pkl
@@ -2523,9 +2519,7 @@ Optionally include additional star file columns:
     --poses data/poses.pkl
     --ind tutorial/01_vae256/ind_selected_classC4.pkl	<span class="se">\	</span>
     --full-path <span class="se">\</span>
-    -o class_C4.128.star <span class="se">\</span>
-    --ref-star original_particles.star <span class="se">\</span>
-    --keep-micrograph
+    -o class_C4.128.star
 </pre></div>
 </div>
 <p>Note to create a filtered</p>
