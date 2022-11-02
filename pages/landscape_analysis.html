@@ -532,7 +532,7 @@ Extra arguments for landscape visualization:
 <p>The default number of clusters is 10. If your dataset is very heterogeneous or if you want a finer resolution, you can increase the number of clusters with the <code class="docutils literal notranslate"><span class="pre">-M</span></code> flag. Changing <code class="docutils literal notranslate"><span class="pre">M</span></code> corresponds to changing the cut point in the dendrogram of agglomerative clustering. Clustering can be repeated by re-running <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">analyze_landscape</span></code> and using the <code class="docutils literal notranslate"><span class="pre">--skip-vol</span></code> flag to skip volume generation, for example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(cryodgn) $ cryodrgn analyze_landscape [workdir] [epoch] --skip-vol -M 20 # use --skip-vol to skip regenerating 1000 volumes
 
-# Results will be found in a new subdirectory, clustering_L2_average_[M] 
+# Results will be found in a new subdirectory, clustering_L2_average_[M]
 </pre></div>
 </div>
 <p><img alt="Left: Clustering results with M=10; Right: Clustering results with M=20" src="../_images/landscape_analysis_clustering_results1.png" /></p>
@@ -556,9 +556,9 @@ Extra arguments for landscape visualization:
 <p><em>Left: Clustering results with default settings. Manual inspection of the cluster means revealed broken/junk volumes for clusters 3,5,6,7,8. Right: Repeating cryodrgn analyze_landscape after removing the 9 junk volumes from the analysis.</em></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># e.g. keep the volumes from clusters 0, 1, 2, 4, 9
 (cryodrgn) $ cryodrgn_utils select_clusters clustering_L2_average_10/cluster_labels.pkl --sel 0 1 2 4 9 -o vol_keep.pkl
- 
+
 # rerun cryodrgn analyze_landscape with --vol-ind
-(cryodrgn) $ cryodrgn analyze_landscape [workdir] [epoch] --skip-vol --skip-mask --vol-ind vol_keep.pkl 
+(cryodrgn) $ cryodrgn analyze_landscape [workdir] [epoch] --skip-vol --skip-mask --vol-ind vol_keep.pkl
 </pre></div>
 </div>
 <p>Note: rerunning with <code class="docutils literal notranslate"><span class="pre">—-vol-ind</span></code> will change the volume PCA results since volumes have now been removed from the analysis.</p>
