@@ -222,8 +222,10 @@ class MRCData(data.Dataset):
         if keepreal:
             self.particles_real = particles_real  # noqa: F821
             log(
-                "Normalized real space images by {}".format(particles_real.std())
-            )  # noqa: F821
+                "Normalized real space images by {}".format(
+                    particles_real.std()  # noqa: F821
+                )
+            )
             self.particles_real /= particles_real.std()  # noqa: F821
 
     def __len__(self):
