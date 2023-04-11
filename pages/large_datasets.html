@@ -1,299 +1,90 @@
-
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-
-<html lang="en" >
-
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
-
-    <title>Dealing with large datasets &#8212; CryoDRGN  documentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cryoDRGN preprocess for large datasets &mdash; CryoDRGN  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
-  
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
-
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pages/large_datasets';</script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="FAQ / Troubleshooting" href="faq.html" />
-    <link rel="prev" title="cryoDRGN Conformational Landscape Analysis" href="landscape_analysis.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="en"/>
-  </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+    <link rel="next" title="CryoDRGN2 quickstart" href="cryodrgn2.html" />
+    <link rel="prev" title="cryoDRGN Conformational Landscape Analysis" href="landscape_analysis.html" /> 
+</head>
 
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search..."
-         aria-label="Search..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
-      
-      <div class="bd-sidebar-primary bd-sidebar">
-        
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
 
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-  
-    <p class="title logo__title">CryoDRGN  documentation</p>
-  
-</a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current nav bd-sidenav">
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CryoDRGN
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">❄️🐉 cryoDRGN Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">cryoDRGN Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="empiar_tutorial.html">cryoDRGN EMPIAR-10076 tutorial</a></li>
 <li class="toctree-l1"><a class="reference internal" href="landscape_analysis.html">cryoDRGN Conformational Landscape Analysis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Dealing with large datasets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">cryoDRGN preprocess for large datasets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#numbers">Numbers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#technicalities">Technicalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#still-too-large">Still too large</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cryodrgn2.html">CryoDRGN2 quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ / Troubleshooting</a></li>
 </ul>
 
-    </div>
-</nav></div>
-    </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
-
-
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
-
-<div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="../_sources/pages/large_datasets.md" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.md</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-<button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
-  </button>
-`);
-</script>
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
-</div></div>
-      
-    </div>
-  
-</div>
-</div>
-              
-              
-
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Dealing with large datasets</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numbers">Numbers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#technicalities">Technicalities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#still-too-large">Still too large</a></li>
-</ul>
-            </nav>
         </div>
-    </div>
-</div>
+      </div>
+    </nav>
 
-              
-                
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
-  <section id="dealing-with-large-datasets">
-<h1>Dealing with large datasets<a class="headerlink" href="#dealing-with-large-datasets" title="Permalink to this heading">#</a></h1>
-<p>Large datasets that do not fit into memory can be trained with the <code class="docutils literal notranslate"><span class="pre">--lazy</span></code> flag, which loads images on-the-fly instead of all at once at the beginning of training. This can, however, be very slow due to the filesystem access pattern for on-the-fly image loading, especially if the data is not located on a SSD drive.</p>
-<p>To reduce the memory requirement of loading the whole dataset, cryoDRGN contains a new tool <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">preprocess</span></code> that performs some of the image preprocessing done at the beginning of training. Separating out image preprocessing significantly reduces the memory requirement of <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">train_vae</span></code>, potentially leading to major training speedups ⚡ ⚡ ⚡ .</p>
-<p>The new workflow replaces <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">downsample</span></code> with <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">preprocess</span></code>:</p>
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CryoDRGN</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">cryoDRGN preprocess for large datasets</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/pages/large_datasets.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cryodrgn-preprocess-for-large-datasets">
+<h1>cryoDRGN preprocess for large datasets<a class="headerlink" href="#cryodrgn-preprocess-for-large-datasets" title="Permalink to this heading"></a></h1>
+<p>CryoDRGN by default loads the entire dataset into memory for fast data access during training. However, large cryo-EM datasets can easily exceed the amount of memory available on standard workstations. For these datasets that do not fit into memory, <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">train_vae</span></code> can be run with the additional <code class="docutils literal notranslate"><span class="pre">--lazy</span></code> flag, which loads images on-the-fly instead of all at once at the beginning of training. This can, however, be very slow due to the filesystem access pattern for on-the-fly image loading, especially if the data is not located on a SSD drive.</p>
+<p>To reduce the memory requirement of loading the whole dataset, as of version 0.3.3, cryoDRGN contains a tool <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">preprocess</span></code> that performs some of the image preprocessing done at the beginning of training. Separating out image preprocessing significantly reduces the memory requirement of <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">train_vae</span></code>, potentially leading to major training speedups ⚡ ⚡ ⚡ .</p>
+<p>The new workflow replaces <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">downsample</span></code> with <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">preprocess</span></code> in the standard cryoDRGN workflow. Note that a new preprocessed particle stack will be created:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Replace `cryodrgn downsample` with `cryodrgn preprocess`</span>
 cryodrgn<span class="w"> </span>preprocess<span class="w"> </span>P10_J712_particles_exported.cs<span class="w"> </span><span class="se">\</span>
 <span class="w">		</span>--datadir<span class="w"> </span>P10/exports/groups/P10_J628_particles/J626/extract<span class="w"> </span><span class="se">\</span>
@@ -319,7 +110,7 @@ cryodrgn<span class="w"> </span>train_vae<span class="w"> </span>data/preprocess
 </pre></div>
 </div>
 <section id="numbers">
-<h2>Numbers<a class="headerlink" href="#numbers" title="Permalink to this heading">#</a></h2>
+<h2>Numbers<a class="headerlink" href="#numbers" title="Permalink to this heading"></a></h2>
 <p>Some numbers for training on a 1,375,854, 128x128 particle dataset (86 GB)</p>
 <p>Baseline:</p>
 <ul class="simple">
@@ -331,10 +122,10 @@ cryodrgn<span class="w"> </span>train_vae<span class="w"> </span>data/preprocess
 <li><p>200 GB maximum memory requirement</p></li>
 <li><p>3.2 min to load the dataset in <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">train_vae</span></code></p></li>
 </ul>
-<p>On a single V100 GPU, this dataset trained in approximately 2h,3min per epoch (large 1024x3 model) when fully loaded into memory. Training with on-the-fly data loading (<code class="docutils literal notranslate"><span class="pre">--lazy</span></code>) was 4x slower, though this can vary widely depending on your filesystem/network.</p>
+<p>On a single Nvidia V100 GPU, this dataset trained in approximately 2h,3min per epoch (large 1024x3 model) when fully loaded into memory. Training with on-the-fly data loading (<code class="docutils literal notranslate"><span class="pre">--lazy</span></code>) was 4x slower, though this can vary widely depending on your filesystem/network. Recent tests on cached filesystems do not have a large penalty for <code class="docutils literal notranslate"><span class="pre">--lazy</span></code> image loading.</p>
 </section>
 <section id="technicalities">
-<h2>Technicalities<a class="headerlink" href="#technicalities" title="Permalink to this heading">#</a></h2>
+<h2>Technicalities<a class="headerlink" href="#technicalities" title="Permalink to this heading"></a></h2>
 <ul>
 <li><p>Using <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">preprocess</span></code> in place of <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">downsample</span></code> means that images will be windowed (circular mask applied in real space) <em>before</em> they are downsampled. This is slightly different than in the original workflow where images are first downsampled, then the mask is applied during training. To exactly replicate the previous behavior, run <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">downsample</span></code> as usual, then run <code class="docutils literal notranslate"><span class="pre">cryodrgn</span> <span class="pre">preprocess</span></code> on the downsampled dataset.</p></li>
 <li><p>Viewing particle images in cryoDRGN_viz.ipynb and cryoDRGN_filtering.ipynb will now show Fourier space images. A current workaround is to overwrite the path with the original particles when loading particle images in the jupyter notebook:</p>
@@ -350,118 +141,45 @@ cryodrgn<span class="w"> </span>train_vae<span class="w"> </span>data/preprocess
 </ul>
 </section>
 <section id="still-too-large">
-<h2>Still too large<a class="headerlink" href="#still-too-large" title="Permalink to this heading">#</a></h2>
-<p>If your dataset is still too large to load into memory, we recommend training on a subset of the images such that the dataset can fit into memory (e.g. split your dataset into two halves and run independent training jobs on each half). A random selection of half of your dataset can be generated with the utility <code class="docutils literal notranslate"><span class="pre">cryodrgn_utils</span> <span class="pre">select_random</span></code>:</p>
+<h2>Still too large<a class="headerlink" href="#still-too-large" title="Permalink to this heading"></a></h2>
+<p>If your dataset is still too large to load into memory, we recommend training on a subset of the images such that the dataset can fit into memory (e.g. split your dataset into two halves and run independent training jobs on each half). A random selection of a subset of your dataset can be generated with the utility <code class="docutils literal notranslate"><span class="pre">cryodrgn_utils</span> <span class="pre">select_random</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># select 200k random particles out of a dataset containing 1,375,854 particles
 (cryodrgn) $ cryodrgn_utils select_random 1375854 -n 200000 -o ind200k.pkl
 </pre></div>
 </div>
-<p>Additional updates and information on chunked data loading are tracked here <a class="github reference external" href="https://github.com/zhonge/cryodrgn/issues/17">zhonge/cryodrgn#17</a>.</p>
+<p>We are currently implementing a large refactor of lazy data loading. Additional updates and information on chunked data loading are tracked here <a class="reference external" href="https://github.com/zhonge/cryodrgn/issues/17">https://github.com/zhonge/cryodrgn/issues/17</a>. Beta code is available in the <code class="docutils literal notranslate"><span class="pre">vb/imagesource</span></code> pull request <a class="reference external" href="https://github.com/zhonge/cryodrgn/pull/221">https://github.com/zhonge/cryodrgn/pull/221</a>.</p>
 </section>
 </section>
 
 
-                </article>
-              
-
-              
-              
-                <footer class="bd-footer-article">
-                  
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="landscape_analysis.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">cryoDRGN Conformational Landscape Analysis</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="faq.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">FAQ / Troubleshooting</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
-</div></div>
-  
-</div>
-
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numbers">Numbers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#technicalities">Technicalities</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#still-too-large">Still too large</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
-            
+           </div>
           </div>
-          <footer class="bd-footer-content">
-            
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Ellen Zhong
-</p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  <p class="copyright">
-    
-      © Copyright 2023, Ellen Zhong.
-      <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div>
-          </footer>
-        
-
-      </main>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="landscape_analysis.html" class="btn btn-neutral float-left" title="cryoDRGN Conformational Landscape Analysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cryodrgn2.html" class="btn btn-neutral float-right" title="CryoDRGN2 quickstart" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
-  </div>
-  
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
 
-  <footer class="bd-footer">
-  </footer>
-  </body>
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Ellen Zhong.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>
